@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Zingee</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        header {
+            background-color: #ff7043;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 10;
+        }
+
+        .search-bar {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 80%;
+            max-width: 500px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px; /* Adjusted padding for button */
+            border: none;
+            background-color: #ff7043;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Trending Restaurants Section */
+        .trending {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .restaurant-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .restaurant-card {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 200px;
+            text-align: center;
+            display: none; /* Initially hide all restaurant cards */
+        }
+
+        .restaurant-card img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Restaurant Menu */
+        .menu {
+            padding: 20px;
+        }
+
+        .menu-items {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .menu-item {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+        }
+
+        .menu-item button {
+            padding: 10px;
+            background-color: #ff7043;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .menu-item button:hover {
+            background-color: #e6502b;
+        }
+
+        /* Hidden sections for restaurant pages */
+        .restaurant-page {
+            display: none;
+        }
+
+        .restaurant-page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <!-- Header with Search -->
+    <header>
+        <div class="logo">
+            <h1> Zingee</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for restaurants, cuisine..." id="searchInput">
+            <button onclick="searchRestaurants()">Search</button>
+        </div>
+    </header>
+
+    <!-- Trending Restaurants Section -->
+    <section class="trending" id="homePage">
+        <h2>Welcome To Zingee</h2>
+        <div class="restaurant-cards">
+            <!-- Restaurant 1 -->
+            <div class="restaurant-card" id="restaurant1-card" data-name="Annaporna" onclick="openRestaurantPage('restaurant1')">
+                <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 204019.png" alt="Restaurant 1">
+                <h3>Annaporna</h3>
+                <p>South Indian-Chinese-North Indian</p>
+                <p>4.5 ★</p>
+            </div>
+            
+
+            <!-- Restaurant 2 -->
+            <div class="restaurant-card" id="restaurant2-card" data-name="Haribhavanam" onclick="openRestaurantPage('restaurant2')">
+                <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 213200.png" alt="Restaurant 2">
+                <h3>Haribhavanam</h3>
+                <p>Indian, Chinese</p>
+                <p>4.2 ★</p>
+            </div>
+
+            <!-- Restaurant 3 -->
+            <div class="restaurant-card" id="restaurant3-card" data-name="Cake zone" onclick="openRestaurantPage('restaurant3')">
+                <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 224940.png" alt="Restaurant 3">
+                <h3>Cake zone</h3>
+                <p>Mexican, Italian</p>
+                <p>4.0 ★</p>
+            </div>
+
+            <!-- Restaurant 4 -->
+            <div class="restaurant-card" id="restaurant4-card" data-name="KFC" onclick="openRestaurantPage('restaurant4')">
+                <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 230708.png" alt="Restaurant 4">
+                <h3>KFC</h3>
+                <p>Continental, Bakery</p>
+                <p>4.3 ★</p>
+            </div>
+        </div>
+        
+    </section>
+    
+    
+
+    <!-- Restaurant 1 Menu Page -->
+    <section id="restaurant1" class="restaurant-page">
+        <header>
+            <h1>Annaporna</h1>
+            <p>Fast Food, Continental</p>
+            <p>4.7 ★</p>
+        </header>
+        <section class="menu">
+            <h2>Menu</h2>
+            <div class="menu-items">
+                <!-- Menu Items for Restaurant 1 -->
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 213316.png" alt="Plain Rost">
+                    <h3>Plain Rost</h3>
+                    <p>₹90</p>
+                    <button onclick="addToCart('Plain Rost')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 213522.png" alt="Masal Rost">
+                    <h3>Masal Rost</h3>
+                    <p>₹120</p>
+                    <button onclick="addToCart('Masal Rost')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 213707.png" alt="Idly">
+                    <h3>Idly</h3>
+                    <p>₹60</p>
+                    <button onclick="addToCart('Idly')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 214003.png" alt="Uthappam">
+                    <h3>Uthappam</h3>
+                    <p>₹60</p>
+                    <button onclick="addToCart('Uthappam')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 214704.png"alt="Pongal Vadai Combo">
+                    <h3>Pongal Vadai Combo</h3>
+                    <p>₹60</p>
+                    <button onclick="addToCart('Pongal Vadai Combo')">Add to Cart</button>
+                </div>
+
+
+                <!-- Add more menu items similarly -->
+            </div>
+            <button onclick="goHome()">Back to Home</button>
+        </section>
+    </section>
+
+    <!-- Restaurant 2 Menu Page -->
+    <section id="restaurant2" class="restaurant-page">
+        <header>
+            <h1>Haribhavanam</h1>
+            <p>Indian, Chinese</p>
+            <p>4.7 ★</p>
+        </header>
+        <section class="menu">
+            <h2>Menu</h2>
+            <div class="menu-items">
+                <!-- Menu Items for Restaurant 2 -->
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 215608.png" alt="Mutton Biryani">
+                    <h3>Mutton Biryani</h3>
+                    <p>₹230</p>
+                    <button onclick="addToCart('Mutton Biryani')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 215745.png" alt="Chicken Biryani">
+                    <h3>Chicken Biryani</h3>
+                    <p>₹180</p>
+                    <button onclick="addToCart('Chicken Biryani')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 220724.png" alt="Grill Chicken">
+                    <h3>Grill Chicken</h3>
+                    <p>₹200</p>
+                    <button onclick="addToCart('Grill Chicken')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 221204.png" alt="Naan">
+                    <h3>Naan</h3>
+                    <p>₹35</p>
+                    <button onclick="addToCart('Naan')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 221433.png" alt="Chicken Butter Masal">
+                    <h3>Chicken Butter Masal</h3>
+                    <p>₹200</p>
+                    <button onclick="addToCart('Chicken Butter Masal')">Add to Cart</button>
+                </div>
+                <!-- Add more menu items similarly -->
+            </div>
+            <button onclick="goHome()">Back to Home</button>
+        </section>
+    </section>
+
+    <!-- Restaurant 3 Menu Page -->
+    <section id="restaurant3" class="restaurant-page">
+        <header>
+            <h1>cake zone</h1>
+            <p>Mexican, Italian</p>
+            <p>4.1 ★</p>
+        </header>
+        <section class="menu">
+            <h2>Menu</h2>
+            <div class="menu-items">
+                <!-- Menu Items for Restaurant 3 -->
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 225342.png" alt="Red velvet">
+                    <h3>Red velvet</h3>
+                    <p>₹150</p>
+                    <button onclick="addToCart('Red velvet')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 225536.png" alt="Black Forest">
+                    <h3>Black Forest</h3>
+                    <p>₹150</p>
+                    <button onclick="addToCart('Black Forest')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 225806.png" alt="Honey Cake">
+                    <h3>Honey Cake</h3>
+                    <p>₹150</p>
+                    <button onclick="addToCart('Honey Cake')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 230233.png" alt="Butterscoch Cake">
+                    <h3>Butterscoch Cake</h3>
+                    <p>₹150</p>
+                    <button onclick="addToCart('Butterscoch Cake')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 230457.png" alt="Vennila cake">
+                    <h3>Vennila cake</h3>
+                    <p>₹150</p>
+                    <button onclick="addToCart('Vennila cake')">Add to Cart</button>
+                </div>
+                <!-- Add more menu items similarly -->
+            </div>
+            <button onclick="goHome()">Back to Home</button>
+        </section>
+    </section>
+
+    <!-- Restaurant 4 Menu Page -->
+    <section id="restaurant4" class="restaurant-page">
+        <header>
+            <h1>KFC</h1>
+            <p>Continental, Bakery</p>
+            <p>4.3 ★</p>
+        </header>
+        <section class="menu">
+            <h2>Menu</h2>
+            <div class="menu-items">
+                <!-- Menu Items for Restaurant 4 -->
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 231035.png"alt="Chicken popcorn">
+                    <h3>Chicken popcorn</h3>
+                    <p>₹120</p>
+                    <button onclick="addToCart('Chicken popcorn')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 231344.png"alt="Chicken wings">
+                    <h3>Chicken wings</h3>
+                    <p>₹120</p>
+                    <button onclick="addToCart('Chicken wings')">Add to Cart</button>
+                </div>
+
+                <div class="menu-item">
+                    <img src="C:\Users\pkdpi\OneDrive\Pictures\Screenshots\Screenshot 2024-09-05 231538.png"alt="burger">
+                    <h3>burger</h3>
+                    <p>₹120</p>
+                    <button onclick="addToCart('burger')">Add to Cart</button>
+                </div>
+                <!-- Add more menu items similarly -->
+            </div>
+            <button onclick="goHome()">Back to Home</button>
+        </section>
+    </section>
+
+    <script>
+        // Function to search restaurants
+        function searchRestaurants() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const restaurantCards = document.getElementsByClassName('restaurant-card');
+            
+            for (let i = 0; i < restaurantCards.length; i++) {
+                const name = restaurantCards[i].getAttribute('data-name').toLowerCase();
+                if (name.includes(query)) {
+                    restaurantCards[i].style.display = 'block';
+                } else {
+                    restaurantCards[i].style.display = 'none';
+                }
+            }
+        }
+
+        // Function to display restaurant page
+        function openRestaurantPage(restaurantId) {
+            document.getElementById('homePage').style.display = 'none';
+
+            const restaurantPages = document.getElementsByClassName('restaurant-page');
+            for (let i = 0; i < restaurantPages.length; i++) {
+                restaurantPages[i].classList.remove('active');
+            }
+
+            document.getElementById(restaurantId).classList.add('active');
+        }
+
+        // Function to go back to home page
+        function goHome() {
+            document.getElementById('homePage').style.display = 'block';
+
+            const restaurantPages = document.getElementsByClassName('restaurant-page');
+            for (let i = 0; i < restaurantPages.length; i++) {
+                restaurantPages[i].classList.remove('active');
+            }
+        }
+
+        // Function to add menu items to cart (mock functionality)
+        function addToCart(item) {
+            alert(item + ' added to cart!');
+        }
+    </script>
+</body>
+</html>
